@@ -4,7 +4,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import Chats from "@/components/Chats";
-import "./../../public/output.png";
 
 const Dashboard = () => {
 
