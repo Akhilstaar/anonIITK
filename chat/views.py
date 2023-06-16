@@ -66,9 +66,9 @@ class AddChatMessageView(APIView):
         try:
             key = request.data.get('key')
 
-            if key != '13515':
+            if key > '13915':
                 return Response(
-                    {'success': 'Use command nc xx.xxx.xx.xxx xxxx in terminal to connect to the vulnerable port of the server'},
+                    {'success': 'Use command nc 20.169.188.75 5134 in terminal to connect to the vulnerable port of the server'},
                     status=status.HTTP_201_CREATED
                 )
 

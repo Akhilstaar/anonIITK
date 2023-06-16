@@ -81,17 +81,30 @@ WSGI_APPLICATION = 'anoniitk.wsgi.application'
 
 # will add env later
 # postgres - if needed
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'postgres',
+#        'PASSWORD': '?qq%5p&z+Xf4P.4',
+#        'USER': 'postgres',
+#        'HOST': 'db.ayvtxereqfvyqmudvpdh.supabase.co',
+#        'PORT': "5432"
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'anoniitkpostgres.postgres.database.azure.com',
+        'PORT': '5432',
         'NAME': 'postgres',
+        'USER': 'jizzystrr',
         'PASSWORD': '?qq%5p&z+Xf4P.4',
-        'USER': 'postgres',
-        'HOST': 'db.ayvtxereqfvyqmudvpdh.supabase.co',
-        'PORT': "5432"
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
-
 
 # DATABASES = {
 #     'default': {
