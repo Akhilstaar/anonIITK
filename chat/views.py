@@ -57,6 +57,9 @@ class ListChatView(APIView):
 class MessageSerializer(serializers.Serializer):
     content = serializers.CharField(max_length=1000)
 
+class MessageKeySerializer(serializers.Serializer):
+    content = serializers.CharField(max_length=1000)
+    key = serializers.IntegerField(max_value=65536)
 
 @throttle_classes([AnonRateThrottle])
 class AddChatMessageView(APIView):
@@ -64,14 +67,15 @@ class AddChatMessageView(APIView):
 
     def post(self, request):
         try:
-            key = request.data.get('key')
+            key_serializer = MessageKeySerializer(data=request.data)
+            key_serializer.is_valid(raise_exception=True)
+            key = key_serializer.validated_data['key']
 
-            if key > '13915':
+            if key != 13515:
                 return Response(
                     {'success': 'Use command nc 20.169.188.75 5134 in terminal to connect to the vulnerable port of the server'},
                     status=status.HTTP_201_CREATED
                 )
-
             else:
                 serializer = MessageSerializer(data=request.data)
                 serializer.is_valid(raise_exception=True)
@@ -85,7 +89,7 @@ class AddChatMessageView(APIView):
                     status=status.HTTP_201_CREATED
                 )
 
-        except ValidationError as e:
+        except serializers.ValidationError as e:
             return Response(
                 {'error': str(e)},
                 status=status.HTTP_400_BAD_REQUEST
